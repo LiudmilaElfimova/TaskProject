@@ -10,22 +10,23 @@ public class Article {
     private  int  id;
     private int[]  kids;
     private  int  score;
-    private  String  text;
     private  int  time;
     private  String title;
     private  String type;
+    private  String  url;
 
-    public Article(String by, int descendants, int id, int[] kids, int score, String text, int time, String title, String type) {
+    public Article(String by, int descendants, int id, int[] kids, int score, int time, String title, String type, String url) {
         this.by = by;
         this.descendants = descendants;
         this.id = id;
         this.kids = kids;
         this.score = score;
-        this.text = text;
         this.time = time;
         this.title = title;
         this.type = type;
+        this.url = url;
     }
+    public Article(){}
 
     public String getBy() {
         return by;
@@ -67,12 +68,12 @@ public class Article {
         this.score = score;
     }
 
-    public String getText() {
-        return text;
+    public String getUrl() {
+        return url;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getTime() {

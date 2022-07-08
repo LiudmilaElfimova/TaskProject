@@ -17,20 +17,18 @@ import java.util.List;
 public class HackerNewsArticleService implements ArticleService {
     @Autowired
     private RestTemplate restTemplate;
-    private int id;
-
+    private final String URL="https://hacker-news.firebaseio.com/v0";
 
 
     @Override
     public Article getArticle(int id){
-        return null;
+        return restTemplate.getForObject(URL+"/item/"+id+".json?print=pretty", Article.class);
     }
 
     @Override
     public List<Article> getArticles(){
         return null;
     }
-
 
     @Override
     public List<Integer> getArticleIDs(){
@@ -39,7 +37,6 @@ public class HackerNewsArticleService implements ArticleService {
         HttpEntity<List<Integer>> entity = new HttpEntity<List<Integer>> (headers);
 
         return restTemplate.exchange(
-                "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Integer>>() {}).getBody();
-
+                URL+"/newstories.json?print=pretty", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Integer>>() {}).getBody();
     }
 }

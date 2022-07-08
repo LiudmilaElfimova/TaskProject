@@ -28,5 +28,12 @@ public class ArticleController {
         List<Integer> articleIds = articleService.getArticleIDs();
         return articleIds.get(0);
     }
+
+    @GetMapping ("/test2")
+    public Article myTest2() {
+        Article article = articleService.getArticle(articleService.getArticleIDs().get(1));
+        return article;
+    }
      */
+
 }
