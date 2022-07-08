@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,16 +19,12 @@ public class HackerNewsArticleService implements ArticleService {
     @Autowired
     private RestTemplate restTemplate;
     private final String URL="https://hacker-news.firebaseio.com/v0";
+    private List<Article> articles = new ArrayList<>();
 
 
     @Override
     public Article getArticle(int id){
         return restTemplate.getForObject(URL+"/item/"+id+".json?print=pretty", Article.class);
-    }
-
-    @Override
-    public List<Article> getArticles(){
-        return null;
     }
 
     @Override
@@ -38,5 +35,15 @@ public class HackerNewsArticleService implements ArticleService {
 
         return restTemplate.exchange(
                 URL+"/newstories.json?print=pretty", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Integer>>() {}).getBody();
+    }
+
+    @Override
+    public List<Article> getArticles(){
+        List<Integer> tenArticleIds = getArticleIDs().subList(0,10);
+        for (int id : tenArticleIds) {
+            Article article = getArticle(id);
+            articles.add(article);
+        }
+        return articles;
     }
 }
