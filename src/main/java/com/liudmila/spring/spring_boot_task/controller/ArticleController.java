@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api")
 public class ArticleController {
+
     @Autowired
     private ArticleService articleService;
 
@@ -20,7 +22,11 @@ public class ArticleController {
         return articles;
     }
 
-
-
-
+    /*
+    @GetMapping ("/test")
+    public Integer myTest() {
+        List<Integer> articleIds = articleService.getArticleIDs();
+        return articleIds.get(0);
+    }
+     */
 }
