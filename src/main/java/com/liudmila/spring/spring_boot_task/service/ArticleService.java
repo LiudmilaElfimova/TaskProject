@@ -8,6 +8,7 @@ public interface ArticleService {
     public Article getArticle(int id);
     public List <Article> getArticles();
     public List<Integer> getArticleIDs();
+    public List<Article> getMoreArticles();
 
 
 }

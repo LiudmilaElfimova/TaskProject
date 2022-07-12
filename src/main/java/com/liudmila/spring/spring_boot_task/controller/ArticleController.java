@@ -33,4 +33,15 @@ public class ArticleController {
         List<Article> articles=articleService.getArticles();
         return articles;
     }
+
+    /**
+     * endpoint for getting more articles
+     *
+     * @return list of articles
+     */
+    @GetMapping ("/more")
+    public List<Article> getMoreArticles() {
+        List<Article> articles=articleService.getMoreArticles();
+        return articles;
+    }
 }
