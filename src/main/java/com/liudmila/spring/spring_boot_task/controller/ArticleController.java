@@ -8,15 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-
+/**
+ *  controller to manage articles
+ *
+ *  @author Liudmila Elfimova
+ */
 @RestController
 @RequestMapping("/api")
 public class ArticleController {
 
+    /**
+     * data access service via API
+     */
     @Autowired
     private ArticleService articleService;
 
-@GetMapping ("/articles")
+    /**
+     * endpoint for getting articles
+     *
+     * @return list of articles
+     */
+    @GetMapping ("/articles")
     public List<Article> getArticles() {
         List<Article> articles=articleService.getArticles();
         return articles;

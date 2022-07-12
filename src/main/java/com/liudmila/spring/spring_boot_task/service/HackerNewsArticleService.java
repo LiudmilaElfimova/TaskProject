@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * getting articles data via API HackerNews
+ *
+ * @author Liudmila Elfimova
+ */
 @Service
 public class HackerNewsArticleService implements ArticleService {
     @Autowired
@@ -22,11 +27,22 @@ public class HackerNewsArticleService implements ArticleService {
     private List<Article> articles = new ArrayList<>();
 
 
+    /**
+     * gets article by id
+     *
+     * @param id article unique ID
+     * @return Article
+     */
     @Override
     public Article getArticle(int id){
         return restTemplate.getForObject(URL+"/item/"+id+".json?print=pretty", Article.class);
     }
 
+    /**
+     * gets list of article IDs
+     *
+     * @return list of article IDs
+     */
     @Override
     public List<Integer> getArticleIDs(){
         HttpHeaders headers = new HttpHeaders();
@@ -37,6 +53,11 @@ public class HackerNewsArticleService implements ArticleService {
                 URL+"/newstories.json?print=pretty", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Integer>>() {}).getBody();
     }
 
+    /**
+     * gets list of articles
+     *
+     * @return list of articles
+     */
     @Override
     public List<Article> getArticles(){
         List<Integer> tenArticleIds = getArticleIDs().subList(0,10);
