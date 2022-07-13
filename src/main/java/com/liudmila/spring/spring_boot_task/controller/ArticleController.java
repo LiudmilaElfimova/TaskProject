@@ -3,10 +3,10 @@ package com.liudmila.spring.spring_boot_task.controller;
 import com.liudmila.spring.spring_boot_task.model.Article;
 import com.liudmila.spring.spring_boot_task.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Optional;
 
 /**
  *  controller to manage articles
@@ -29,19 +29,10 @@ public class ArticleController {
      * @return list of articles
      */
     @GetMapping ("/articles")
-    public List<Article> getArticles() {
-        List<Article> articles=articleService.getArticles();
-        return articles;
-    }
-
-    /**
-     * endpoint for getting more articles
-     *
-     * @return list of articles
-     */
-    @GetMapping ("/more")
-    public List<Article> getMoreArticles() {
-        List<Article> articles=articleService.getMoreArticles();
+    @ResponseBody
+    public List<Article> getArticles(@RequestParam Optional<Integer> id) {
+        Integer articleId = id.orElseGet(() -> 0);
+        List<Article> articles=articleService.getArticles(articleId);
         return articles;
     }
 }

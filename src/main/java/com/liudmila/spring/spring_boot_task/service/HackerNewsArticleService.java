@@ -25,8 +25,8 @@ public class HackerNewsArticleService implements ArticleService {
     private RestTemplate restTemplate;
     private final String URL="https://hacker-news.firebaseio.com/v0";
     private List<Article> articles = new ArrayList<>();
-    private int firstIndex=0;
-    private int lastIndex=10;
+    private int firstIndex;
+    private int lastIndex;
 
 
     /**
@@ -61,36 +61,19 @@ public class HackerNewsArticleService implements ArticleService {
      * @return list of articles
      */
     @Override
-    public List<Article> getArticles(){
-        if  (articles.isEmpty()) {
-            List<Integer> tenArticleIds = getArticleIDs().subList(firstIndex, lastIndex);
-            for (int id : tenArticleIds) {
-                Article article = getArticle(id);
-                articles.add(article);
-            }
-        }
-        return articles;
-    }
-
-    /**
-     * gets more articles
-     *
-     * @return list of articles
-     */
-    @Override
-    public List<Article> getMoreArticles(){
-        if  (!articles.isEmpty()) {
-            firstIndex+=10;
-            lastIndex+=10;
+    public List<Article> getArticles(int articleId){
+        if ((articleId == 0) && (!articles.isEmpty())) {
+            return articles;
         }
         List<Integer> articleIds = getArticleIDs();
-        if (lastIndex<=articleIds.size()) {
-            List<Integer> tenArticleIds = articleIds.subList(firstIndex, lastIndex);
+        //checking to get the article id
+        firstIndex = articleId == 0 ? articleId : articleIds.indexOf(articleId) + 1;
+        lastIndex = firstIndex + 10;
+        List<Integer> tenArticleIds = articleIds.subList(firstIndex, lastIndex);
             for (int id : tenArticleIds) {
                 Article article = getArticle(id);
                 articles.add(article);
             }
-        }
         return articles;
     }
 }
