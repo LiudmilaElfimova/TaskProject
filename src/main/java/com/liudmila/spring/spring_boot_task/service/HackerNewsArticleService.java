@@ -63,7 +63,7 @@ public class HackerNewsArticleService implements ArticleService {
     @Override
     public List<Article> getArticles(int articleId){
         if ((articleId == 0) && (!articles.isEmpty())) {
-            return articles;
+            articles.clear();
         }
         List<Integer> articleIds = getArticleIDs();
         //checking to get the article id
