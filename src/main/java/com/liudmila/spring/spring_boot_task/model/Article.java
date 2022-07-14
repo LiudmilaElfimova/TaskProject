@@ -2,13 +2,18 @@ package com.liudmila.spring.spring_boot_task.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Article {
 
     private  String by;
     private  int descendants;
+    @Id
     private  int  id;
-    private int[]  kids;
+    private int []  kids;
     private  int  score;
     private  int  time;
     private  String title;

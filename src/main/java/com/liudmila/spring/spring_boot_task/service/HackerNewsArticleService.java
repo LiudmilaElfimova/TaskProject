@@ -24,9 +24,6 @@ public class HackerNewsArticleService implements ArticleService {
     @Autowired
     private RestTemplate restTemplate;
     private final String URL="https://hacker-news.firebaseio.com/v0";
-    private List<Article> articles = new ArrayList<>();
-    private int firstIndex;
-    private int lastIndex;
 
 
     /**
@@ -62,9 +59,9 @@ public class HackerNewsArticleService implements ArticleService {
      */
     @Override
     public List<Article> getArticles(int articleId){
-        if ((articleId == 0) && (!articles.isEmpty())) {
-            articles.clear();
-        }
+        List<Article> articles = new ArrayList<>();
+        int firstIndex;
+        int lastIndex;
         List<Integer> articleIds = getArticleIDs();
         //checking to get the article id
         firstIndex = articleId == 0 ? articleId : articleIds.indexOf(articleId) + 1;
