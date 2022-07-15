@@ -1,12 +1,15 @@
 package com.liudmila.spring.spring_boot_task.controller;
 
 import com.liudmila.spring.spring_boot_task.model.Article;
+import com.liudmila.spring.spring_boot_task.model.Customer;
 import com.liudmila.spring.spring_boot_task.service.ArticleService;
+import com.liudmila.spring.spring_boot_task.service.ArticleServiceImpl;
 import com.liudmila.spring.spring_boot_task.service.ReceivingArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,5 +39,18 @@ public class ArticleController {
         Integer articleId = id.orElseGet(() -> 0);
         List<Article> articles= receivingArticleService.getArticles(articleId);
         return articles;
+    }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public void addFavoriteArticle(@RequestParam Map<String,String> reqParam) {
+        Article article= new Article();
+        article.setId(Integer.valueOf(reqParam.get("id")));
+        article.setTitle(reqParam.get("title"));
+        article.setUrl(reqParam.get("url"));
+        articleService.saveArticle(article);
+        Customer customer= new Customer();
+        customer.setСustomerName(reqParam.get("name"));
+        articleService.saveCustomer(customer);
     }
 }

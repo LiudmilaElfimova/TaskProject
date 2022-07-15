@@ -7,4 +7,5 @@ import com.liudmila.spring.spring_boot_task.model.Customer;
 public interface ArticleService {
 
     public void saveArticle(Article article);
+    public void saveCustomer(Customer customer);
 }

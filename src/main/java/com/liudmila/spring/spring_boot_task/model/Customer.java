@@ -9,4 +9,15 @@ public class Customer {
     private  long  id;
     @Column(unique = true, updatable = false)
     private  String сustomerName;
+
+    public Customer() {
+    }
+
+    public String getСustomerName() {
+        return сustomerName;
+    }
+
+    public void setСustomerName(String сustomerName) {
+        this.сustomerName = сustomerName;
+    }
 }
