@@ -2,25 +2,40 @@ package com.liudmila.spring.spring_boot_task.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Article {
 
     private  String by;
-    private  int descendants;
+    private  Integer descendants;
     @Id
-    private  int  id;
-    private int []  kids;
-    private  int  score;
-    private  int  time;
+    private  Integer  id;
+    private Integer []  kids;
+    private  Integer  score;
+    private  Integer  time;
+    @Column
     private  String title;
     private  String type;
+    @Column
     private  String  url;
 
-    public Article(String by, int descendants, int id, int[] kids, int score, int time, String title, String type, String url) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer сustomer;
+
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @PrePersist
+    protected void onCreate()
+    {
+        this.createdDate = LocalDateTime.now();
+    }
+
+
+    public Article(String by, Integer descendants, Integer id, Integer[] kids, Integer score, Integer time, String title, String type, String url) {
         this.by = by;
         this.descendants = descendants;
         this.id = id;
@@ -45,7 +60,7 @@ public class Article {
         return descendants;
     }
 
-    public void setDescendants(int descendants) {
+    public void setDescendants(Integer descendants) {
         this.descendants = descendants;
     }
 
@@ -53,15 +68,15 @@ public class Article {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int[] getKids() {
+    public Integer[] getKids() {
         return kids;
     }
 
-    public void setKids(int[] kids) {
+    public void setKids(Integer[] kids) {
         this.kids = kids;
     }
 
@@ -69,7 +84,7 @@ public class Article {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
@@ -81,11 +96,11 @@ public class Article {
         this.url = url;
     }
 
-    public int getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 

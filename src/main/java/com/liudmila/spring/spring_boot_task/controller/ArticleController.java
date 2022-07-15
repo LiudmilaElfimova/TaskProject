@@ -2,6 +2,7 @@ package com.liudmila.spring.spring_boot_task.controller;
 
 import com.liudmila.spring.spring_boot_task.model.Article;
 import com.liudmila.spring.spring_boot_task.service.ArticleService;
+import com.liudmila.spring.spring_boot_task.service.ReceivingArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,9 @@ public class ArticleController {
      * data access service via API
      */
     @Autowired
+    private ReceivingArticleService receivingArticleService;
+    @Autowired
     private ArticleService articleService;
-
     /**
      * endpoint for getting articles
      *
@@ -32,7 +34,7 @@ public class ArticleController {
     @ResponseBody
     public List<Article> getArticles(@RequestParam Optional<Integer> id) {
         Integer articleId = id.orElseGet(() -> 0);
-        List<Article> articles=articleService.getArticles(articleId);
+        List<Article> articles= receivingArticleService.getArticles(articleId);
         return articles;
     }
 }

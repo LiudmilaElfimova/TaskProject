@@ -20,7 +20,7 @@ import java.util.List;
  * @author Liudmila Elfimova
  */
 @Service
-public class HackerNewsArticleService implements ArticleService {
+public class HackerNewsReceivingArticleService implements ReceivingArticleService {
     @Autowired
     private RestTemplate restTemplate;
     private final String URL="https://hacker-news.firebaseio.com/v0";
