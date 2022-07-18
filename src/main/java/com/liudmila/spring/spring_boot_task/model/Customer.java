@@ -2,8 +2,11 @@ package com.liudmila.spring.spring_boot_task.model;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Customer {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long  id;
@@ -13,11 +16,15 @@ public class Customer {
     public Customer() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getСustomerName() {
         return сustomerName;
     }
 
-    public void setСustomerName(String сustomerName) {
+    public void setСustomerName(String сustomername) {
         this.сustomerName = сustomerName;
     }
 }

@@ -22,7 +22,10 @@ public class Article {
     @Column
     private  String  url;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "customer_id")
     private Customer сustomer;
 
     @Column(updatable = false)
@@ -118,6 +121,10 @@ public class Article {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setСustomer(Customer customer) {
+        this.сustomer = customer;
     }
 
 

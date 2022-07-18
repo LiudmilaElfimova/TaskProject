@@ -8,4 +8,5 @@ public interface ArticleService {
 
     public void saveArticle(Article article);
     public void saveCustomer(Customer customer);
+    public Customer findCustomerByCustomerName(String customerName);
 }

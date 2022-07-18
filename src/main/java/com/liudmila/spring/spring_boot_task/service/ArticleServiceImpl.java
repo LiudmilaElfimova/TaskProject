@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
@@ -25,5 +26,13 @@ public class ArticleServiceImpl implements ArticleService {
     public void saveCustomer(Customer customer){
         customerRepository.save(customer);
     }
+
+    @Override
+    public Customer findCustomerByCustomerName(String customerName){
+        return customerRepository.findCustomerByСustomerName(customerName).orElseThrow();
+    }
 }
+
+
+
 
