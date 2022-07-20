@@ -7,10 +7,15 @@ import com.liudmila.spring.spring_boot_task.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * service for working with customer's favorite articles
+ *
+ * @author Liudmila Elfimova
+ */
 
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private ArticleRepository articleRepository;
     @Autowired
@@ -18,20 +23,22 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public void saveArticle(Article article){
+    public void saveArticle(Article article) {
         articleRepository.save(article);
     }
 
     @Override
-    public void saveCustomer(Customer customer){
+    public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 
     @Override
-    public Customer findCustomerByCustomerName(String customerName){
+    public Customer findCustomerByCustomerName(String customerName) {
         return customerRepository.findCustomerByСustomerName(customerName).orElseThrow();
     }
 }
+
+
 
 
 
