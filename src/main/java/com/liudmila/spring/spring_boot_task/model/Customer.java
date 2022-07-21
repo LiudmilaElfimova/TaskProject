@@ -8,11 +8,15 @@ import java.util.Set;
 @Entity
 public class Customer {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long  id;
     @Column(unique = true, updatable = false)
     private  String сustomerName;
+
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
@@ -41,5 +45,8 @@ public class Customer {
 
     public Set<Article> getLikedArticles() {
         return likedArticles;
+    }
+    public void setLikedArticles(Set<Article> likedArticles) {
+        this.likedArticles = likedArticles;
     }
 }

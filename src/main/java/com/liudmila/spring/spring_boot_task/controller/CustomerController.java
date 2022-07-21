@@ -6,6 +6,8 @@ import com.liudmila.spring.spring_boot_task.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  *  controller to manage the customer's favorite articles
  *
@@ -30,5 +32,17 @@ public class CustomerController {
         article.getСustomer().add(customer);
         customer.getLikedArticles().add(article);
         customerService.saveArticle(article);
+    }
+
+    /**
+     * endpoint for getting all the customer's favorite articles
+     *
+     * @return list of articles
+     */
+    @GetMapping("/articles")
+    @ResponseBody
+    public List<Article> getAllArticlesForCustomer(@RequestParam String name) {
+        Customer customer= customerService.findCustomerByCustomerName(name);
+        return customerService.getAllArticleForCustomer(customer);
     }
 }

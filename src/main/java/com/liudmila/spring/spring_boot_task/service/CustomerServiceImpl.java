@@ -7,6 +7,10 @@ import com.liudmila.spring.spring_boot_task.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * service for working with customer's favorite articles
  *
@@ -20,6 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
     private ArticleRepository articleRepository;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private ArticleService articleService;
 
 
     @Override
@@ -36,6 +42,20 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findCustomerByCustomerName(String customerName) {
         return customerRepository.findCustomerByСustomerName(customerName).orElseThrow();
     }
+
+    /**
+     * getting all the customer's favorite articles
+     */
+    @Override
+    public List<Article> getAllArticleForCustomer(Customer customer) {
+        Set<Article> likedArticles = customer.getLikedArticles();
+        List<Article> articles = new ArrayList<>();
+        for (Article article : likedArticles) {
+            articles.add(articleService.getArticle(article.getId()));
+        }
+        return articles;
+    }
+
 }
 
 
