@@ -11,5 +11,6 @@ public interface CustomerService {
     public void saveArticle(Article article);
     public void saveCustomer(Customer customer);
     public Customer findCustomerByCustomerName(String customerName);
-    public List<Article> getAllArticleForCustomer(Customer customer);
+    public void addFavoriteArticle(String userName, Integer articleId);
+    public List<Article> getAllArticleForCustomer(String name);
 }

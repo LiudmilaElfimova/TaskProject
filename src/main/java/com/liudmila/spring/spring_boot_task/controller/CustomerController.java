@@ -1,12 +1,11 @@
 package com.liudmila.spring.spring_boot_task.controller;
 
-import com.liudmila.spring.spring_boot_task.model.Article;
-import com.liudmila.spring.spring_boot_task.model.Customer;
 import com.liudmila.spring.spring_boot_task.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 /**
  *  controller to manage the customer's favorite articles
@@ -25,14 +24,16 @@ public class CustomerController {
      */
     @PostMapping("/{userName}/likedArticle")
     @ResponseBody
-    public void addFavoriteArticle(@PathVariable("userName") String userName,
-                                   @RequestBody Integer articleId){
-        Customer customer = customerService.findCustomerByCustomerName(userName);
-        Article article = new Article (articleId);
-        article.getСustomer().add(customer);
-        customer.getLikedArticles().add(article);
-        customerService.saveArticle(article);
+    public ResponseEntity addFavoriteArticle(@PathVariable("userName") String userName,
+                                             @RequestBody Integer articleId){
+        try {
+             customerService.addFavoriteArticle(userName,articleId);
+             return ResponseEntity.ok("Article successfully saved");
+        }  catch (Exception e) {
+             return ResponseEntity.badRequest().body("Failed to add article");
+        }
     }
+
     /**
      * endpoint for getting all the customer's favorite articles
      *
@@ -40,8 +41,12 @@ public class CustomerController {
      */
     @GetMapping("/articles")
     @ResponseBody
-    public List<Article> getAllArticlesForCustomer(@RequestParam String name) {
-        Customer customer= customerService.findCustomerByCustomerName(name);
-        return customerService.getAllArticleForCustomer(customer);
+    public ResponseEntity getAllArticlesForCustomer(@RequestParam String name) {
+        try {
+            return ResponseEntity.ok(customerService.getAllArticleForCustomer(name));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to get favorite articles");
+        }
     }
 }
