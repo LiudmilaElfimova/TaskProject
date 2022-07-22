@@ -23,17 +23,16 @@ public class CustomerController {
     /**
      * saving the customer's favorite article to the Database
      */
-    @PostMapping("/{userName}/likedArticle/{articleId}")
+    @PostMapping("/{userName}/likedArticle")
     @ResponseBody
     public void addFavoriteArticle(@PathVariable("userName") String userName,
-                                   @PathVariable("articleId") String articleId){
+                                   @RequestBody Integer articleId){
         Customer customer = customerService.findCustomerByCustomerName(userName);
-        Article article = new Article (Integer.parseInt(articleId));
+        Article article = new Article (articleId);
         article.getСustomer().add(customer);
         customer.getLikedArticles().add(article);
         customerService.saveArticle(article);
     }
-
     /**
      * endpoint for getting all the customer's favorite articles
      *
