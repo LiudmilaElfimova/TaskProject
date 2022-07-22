@@ -36,8 +36,6 @@ public class CustomerController {
 
     /**
      * endpoint for getting all the customer's favorite articles
-     *
-     * @return list of articles
      */
     @GetMapping("/articles")
     @ResponseBody
