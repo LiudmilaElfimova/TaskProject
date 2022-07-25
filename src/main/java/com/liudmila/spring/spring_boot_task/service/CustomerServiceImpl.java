@@ -1,5 +1,6 @@
 package com.liudmila.spring.spring_boot_task.service;
 
+import com.liudmila.spring.spring_boot_task.Repository.ArticleRepository;
 import com.liudmila.spring.spring_boot_task.Repository.CustomerRepository;
 import com.liudmila.spring.spring_boot_task.model.Article;
 import com.liudmila.spring.spring_boot_task.model.Customer;
@@ -22,6 +23,8 @@ public class CustomerServiceImpl implements CustomerService {
     private  HackerNewsClient hackerNewsClient;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private ArticleRepository articleRepository;
 
 
 
@@ -56,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
         Article article = new Article (articleId);
         article.getСustomer().add(customer);
         customer.getLikedArticles().add(article);
-        hackerNewsClient.saveArticle(article);
+        articleRepository.save(article);
     }
 }
 

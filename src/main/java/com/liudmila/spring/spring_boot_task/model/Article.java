@@ -151,6 +151,4 @@ public class Article {
     public void setType(String type) {
         this.type = type;
     }
-
-
 }
