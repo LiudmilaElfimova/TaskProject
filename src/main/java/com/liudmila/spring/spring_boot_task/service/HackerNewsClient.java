@@ -1,6 +1,7 @@
 package com.liudmila.spring.spring_boot_task.service;
 
 import com.liudmila.spring.spring_boot_task.model.Article;
+import com.liudmila.spring.spring_boot_task.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -32,7 +33,7 @@ public class HackerNewsClient {
      * @param id article unique ID
      * @return Article
      */
-    public Article getArticle(int id){
+    public Article getArticle(Integer id){
         return restTemplate.getForObject(URL+"/item/"+id+".json?print=pretty", Article.class);
     }
 
@@ -47,5 +48,15 @@ public class HackerNewsClient {
         HttpEntity<List<Integer>> entity = new HttpEntity<List<Integer>> (headers);
         return restTemplate.exchange(
                 URL+"/newstories.json?print=pretty", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Integer>>() {}).getBody();
+    }
+
+    /**
+     * gets comment by id
+     *
+     * @param id comment unique ID
+     * @return Comment
+     */
+    public Comment getComment(Integer id){
+        return restTemplate.getForObject(URL+"/item/"+id+".json?print=pretty", Comment.class);
     }
 }

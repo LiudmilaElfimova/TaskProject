@@ -1,10 +1,12 @@
 package com.liudmila.spring.spring_boot_task.service;
 
 import com.liudmila.spring.spring_boot_task.model.Article;
+import com.liudmila.spring.spring_boot_task.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,16 +20,16 @@ public class HackerNewsArticleService implements ArticleService {
     private  HackerNewsClient hackerNewsClient;
 
     /**
-     * gets list of articles
+     * gets list of newest articles
      *
      * @return list of articles
      */
     @Override
     public List<Article> getArticles(int articleId){
         List<Article> articles = new ArrayList<>();
+        List<Integer> articleIds = hackerNewsClient.getArticleIDs();
         int firstIndex;
         int lastIndex;
-        List<Integer> articleIds = hackerNewsClient.getArticleIDs();
         //checking to get the article id
         firstIndex = articleId == 0 ? articleId : articleIds.indexOf(articleId) + 1;
         lastIndex = firstIndex + 10;
@@ -38,4 +40,5 @@ public class HackerNewsArticleService implements ArticleService {
             }
         return articles;
     }
+
 }
